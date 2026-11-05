@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Town.unity
+    guid: e9653f2dd535b404886144e78c049adc
+  - enabled: 1
+    path: Assets/Scenes/DungeonCity.unity
+    guid: 8d0127f46867fda4d974a53c59380445
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Interior_Inn.unity
+    guid: 037f6306b953fb34d8ccf790cfd5766e
+  - enabled: 1
+    path: Assets/Scenes/Interior_Smithy.unity
+    guid: f53fc941dae34564c9028d18fd57a13d
+  - enabled: 1
+    path: Assets/Scenes/Interior_Shop.unity
+    guid: d0debc2e1ed80664197d90a593cf7c7b
+  - enabled: 1
+    path: Assets/Scenes/Interior_Academy.unity
+    guid: a58e5631495ec7c47943a9f28e4ef253
+  - enabled: 1
+    path: Assets/Scenes/Interior_Tavern.unity
+    guid: 5e5d5efbc04e7ba4e88db323a49cdad9
+  - enabled: 1
+    path: Assets/Scenes/Interior_Cathedral.unity
+    guid: f130fcc9c05d3f040b258a6d7a0a28c9
+  - enabled: 1
+    path: Assets/Scenes/Interior_Home.unity
+    guid: f9aab44548da5a54aa51a25e8041cb56
+  - enabled: 1
+    path: Assets/Scenes/Interior_PropOffice.unity
+    guid: 4dfb147bce299244797a8b80a6d2459b
+  - enabled: 1
+    path: Assets/Scenes/GuildInterior.unity
+    guid: 0c8fae144bddb0c4fb18df146954ec4d
+  - enabled: 1
+    path: Assets/Scenes/Interior_GuildEldrath.unity
+    guid: 5529d98df4c5da44094edae9385e5a60
+  - enabled: 1
+    path: Assets/Scenes/HuntArea_G.unity
+    guid: 190c51bf317647d469ccd3a03e145022
+  - enabled: 1
+    path: Assets/Scenes/HuntArea_Swamp.unity
+    guid: fc254e720d25f5f42b1c54ae69cfa416
+  - enabled: 1
+    path: Assets/Scenes/HuntArea_Desert.unity
+    guid: 54c3f0bf6c6c0774cadf309934501ef9
+  - enabled: 1
+    path: Assets/Scenes/HuntArea_Frontier.unity
+    guid: c7ccddc80593633488b4e5c4e79d1e1e
+  - enabled: 1
+    path: Assets/Scenes/HuntArea_Volcano.unity
+    guid: 4cb39080aac2a8a429076a5f1c5b02d6
+  - enabled: 1
+    path: Assets/Scenes/HuntArea_Bone.unity
+    guid: 355bd7db3fa70ce4490c985a9a63b157
+  - enabled: 1
+    path: Assets/Scenes/HuntArea_Demon.unity
+    guid: 18a160ec4d3489a43996b03e3bc74383
+  - enabled: 1
+    path: Assets/Scenes/DungeonTower.unity
+    guid: 7128ee356b52332499b6a3b8c2b38510
+  - enabled: 1
+    path: Assets/Scenes/ArenaExam.unity
+    guid: 25e2670658d885f4ead28bb33a411dd0
+  - enabled: 1
+    path: Assets/Scenes/StartVillage.unity
+    guid: 67fbdf61d7a512e4992419aa6742b2d7
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_UseUCBPForAssetBundles: 0

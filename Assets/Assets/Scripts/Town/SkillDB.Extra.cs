@@ -1,0 +1,240 @@
+namespace HunterGuild
+{
+    public static partial class SkillDB
+    {
+        static string curEvo = "";
+
+        static void Pp(string job, string branch, int idx, string id, string name, string desc, string pas)
+        {
+            Reg(new SkillDef { id = id, name = name, job = job, branch = branch, evo = curEvo, tier = 1, cost = 1, index = idx, active = false, desc = desc, pasStr = pas });
+        }
+
+        static void Aa(string job, string branch, int tier, int idx, string id, string name, float cd, string kind, string elem, float mult, float radius, float range, string fx, string desc)
+        {
+            Reg(new SkillDef { id = id, name = name, job = job, branch = branch, evo = curEvo, tier = tier, cost = tier == 2 ? 3 : 5, index = idx, active = true, cooldown = cd, mult = mult, kind = kind, elem = elem, radius = radius, range = range, fx = fx, desc = desc });
+        }
+
+        static void BuildNewJobs()
+        {
+            curEvo = "";
+            string b;
+
+            b = WaterBranches[0];
+            Pp("WaterMage", b, 0, "wm_tid_1", "Deep Current", "Semua sihir air +10% damage.", "dmg:0.10");
+            Pp("WaterMage", b, 1, "wm_tid_2", "Rising Tide", "Pemulihan mana +20%.", "manaregen:0.20");
+            Pp("WaterMage", b, 2, "wm_tid_3", "Salt Spray", "Bola air dasar memperlambat musuh sesaat.", "slowbolt:1;dmg:0.03");
+            Aa("WaterMage", b, 2, 0, "wm_tid_4", "Water Jet", 10f, "line", "water", 1.9f, 1.2f, 18f, "knock:2", "Semburan air bertekanan menembus semua musuh di depan.");
+            Aa("WaterMage", b, 2, 1, "wm_tid_5", "Tidal Wave", 13f, "cone", "water", 1.8f, 50f, 11f, "knock:5;slow:0.6:2", "Gelombang air mendorong dan memperlambat musuh di depanmu.");
+            Aa("WaterMage", b, 3, 0, "wm_tid_6", "Tsunami", 70f, "line", "water", 3.6f, 4.5f, 28f, "knock:8;stagger:1", "Ultimate: gelombang raksasa menyapu segalanya di depan.");
+            b = WaterBranches[1];
+            Pp("WaterMage", b, 0, "wm_fst_1", "Chill Touch", "Sihir lebih tajam: damage +6%, crit +3%.", "dmg:0.06;crit:3");
+            Pp("WaterMage", b, 1, "wm_fst_2", "Frost Armor", "Lapisan es: DEF +6.", "def:6");
+            Pp("WaterMage", b, 2, "wm_fst_3", "Winter Mind", "Pikiran dingin: mana maksimum +25.", "mana:25");
+            Aa("WaterMage", b, 2, 0, "wm_fst_4", "Ice Spike", 9f, "ground", "water", 2.0f, 3.2f, 24f, "slow:0.4:3", "Pecahan es menyembul dari tanah di titik bidikan.");
+            Aa("WaterMage", b, 2, 1, "wm_fst_5", "Frost Nova", 13f, "nova", "water", 1.7f, 7f, 0f, "stagger:1.8;slow:0.35:4", "Ledakan beku di sekelilingmu menahan semua musuh.");
+            Aa("WaterMage", b, 3, 0, "wm_fst_6", "Blizzard", 75f, "ground", "water", 1.3f, 9f, 30f, "slow:0.4:3;count:8;tick:0.7;dur:6", "Ultimate: badai salju di area bidikan.");
+            b = WaterBranches[2];
+            Pp("WaterMage", b, 0, "wm_mst_1", "Clear Mind", "Pemulihan mana +25%.", "manaregen:0.25");
+            Pp("WaterMage", b, 1, "wm_mst_2", "Dew Veil", "Tabir embun: damage masuk -6%.", "dmgred:0.06");
+            Pp("WaterMage", b, 2, "wm_mst_3", "Wellspring", "HP pulih 0,8% per detik.", "regen:0.008");
+            Aa("WaterMage", b, 2, 0, "wm_mst_4", "Healing Rain", 14f, "heal", "water", 0f, 7f, 0f, "heal:0.06;count:5;tick:1;dur:5", "Hujan penyembuh: pulihkan HP dirimu dan sekutu selama 5 detik.");
+            Aa("WaterMage", b, 2, 1, "wm_mst_5", "Bubble Shield", 16f, "buff", "water", 0f, 0f, 0f, "b_dmgred:0.55;dur:5", "Gelembung pelindung: damage masuk -55% selama 5 dtk.");
+            Aa("WaterMage", b, 3, 0, "wm_mst_6", "Moonlit Spring", 90f, "heal", "water", 0f, 8f, 0f, "heal:0.55;mana:0.6;b_dmgred:0.3;dur:6", "Ultimate: mata air bulan memulihkan HP dan mana.");
+            b = WindBranches[0];
+            Pp("WindMage", b, 0, "wd_gal_1", "Rising Wind", "Semua sihir angin +10% damage.", "dmg:0.10");
+            Pp("WindMage", b, 1, "wd_gal_2", "Tailwind", "Cooldown skill -8%.", "cdr:0.08");
+            Pp("WindMage", b, 2, "wd_gal_3", "Gust Caller", "Angin membantu: damage +4%, mana pulih +10%.", "dmg:0.04;manaregen:0.10");
+            Aa("WindMage", b, 2, 0, "wd_gal_4", "Wind Slash", 8f, "line", "wind", 1.7f, 1.4f, 20f, "knock:1.5", "Sayatan angin menembus musuh di depan.");
+            Aa("WindMage", b, 2, 1, "wd_gal_5", "Cyclone", 13f, "ground", "wind", 1.4f, 5f, 22f, "pull:6;count:4;tick:0.5;dur:2", "Pusaran kecil menarik dan melukai musuh.");
+            Aa("WindMage", b, 3, 0, "wd_gal_6", "Tornado", 70f, "ground", "wind", 1.0f, 7f, 26f, "pull:9;count:12;tick:0.5;dur:6;stagger:0.3", "Ultimate: tornado raksasa menyedot dan mencabik musuh.");
+            b = WindBranches[1];
+            Pp("WindMage", b, 0, "wd_zep_1", "Light Wind", "Kecepatan gerak +8%.", "spd:0.08");
+            Pp("WindMage", b, 1, "wd_zep_2", "Feather Step", "Kecepatan +4%, damage masuk -4%.", "spd:0.04;dmgred:0.04");
+            Pp("WindMage", b, 2, "wd_zep_3", "Second Breath", "HP pulih 0,6%/dtk dan kecepatan +3%.", "regen:0.006;spd:0.03");
+            Aa("WindMage", b, 2, 0, "wd_zep_4", "Gust Dash", 7f, "dash", "wind", 1.2f, 0f, 9f, "invuln:0.35", "Meluncur cepat dengan angin; kebal sesaat.");
+            Aa("WindMage", b, 2, 1, "wd_zep_5", "Updraft", 12f, "nova", "wind", 1.6f, 6f, 0f, "knock:6;stagger:0.8", "Hembusan ke atas melempar musuh di sekitarmu.");
+            Aa("WindMage", b, 3, 0, "wd_zep_6", "Storm Step", 60f, "buff", "wind", 0f, 0f, 0f, "b_spd:0.35;b_dmg:0.25;b_cdr:0.3;dur:10", "Ultimate: kecepatan, damage, dan cooldown meningkat 10 dtk.");
+            b = WindBranches[2];
+            Pp("WindMage", b, 0, "wd_rzr_1", "Keen Edge", "Peluang crit +6%.", "crit:6");
+            Pp("WindMage", b, 1, "wd_rzr_2", "Razor Breeze", "Damage +7%.", "dmg:0.07");
+            Pp("WindMage", b, 2, "wd_rzr_3", "Silent Cut", "Crit +4%, damage +4%.", "crit:4;dmg:0.04");
+            Aa("WindMage", b, 2, 0, "wd_rzr_4", "Blade Flurry", 9f, "bolt", "wind", 1.1f, 0f, 22f, "count:5;spread:36", "Lima bilah angin menyebar seperti kipas.");
+            Aa("WindMage", b, 2, 1, "wd_rzr_5", "Piercing Gale", 13f, "line", "wind", 2.4f, 1.0f, 26f, "crit:30", "Tusukan angin tajam menembus musuh, peluang crit tinggi.");
+            Aa("WindMage", b, 3, 0, "wd_rzr_6", "Thousand Blades", 70f, "ground", "wind", 0.7f, 8f, 26f, "count:16;tick:0.3;dur:5", "Ultimate: ribuan bilah angin menghujani area.");
+            b = PriestBranches[0];
+            Pp("Priest", b, 0, "pr_rad_1", "Holy Fervor", "Semua sihir cahaya +10% damage.", "dmg:0.10");
+            Pp("Priest", b, 1, "pr_rad_2", "Radiant Aim", "Crit +5%, damage +3%.", "crit:5;dmg:0.03");
+            Pp("Priest", b, 2, "pr_rad_3", "Zeal", "Pemulihan mana +15%.", "manaregen:0.15");
+            Aa("Priest", b, 2, 0, "pr_rad_4", "Smite", 9f, "ground", "holy", 2.0f, 3f, 24f, "stagger:0.6;heal:0.04", "Cahaya menghantam titik bidikan; menyembuhkanmu sedikit.");
+            Aa("Priest", b, 2, 1, "pr_rad_5", "Divine Ray", 13f, "line", "holy", 2.2f, 1.5f, 24f, "lifesteal:0.2", "Sinar suci menembus musuh dan menyerap sebagian damage jadi HP.");
+            Aa("Priest", b, 3, 0, "pr_rad_6", "Judgment", 75f, "nova", "holy", 3.8f, 10f, 0f, "stagger:1.5;heal:0.25", "Ultimate: penghakiman cahaya meledak di sekelilingmu.");
+            b = PriestBranches[1];
+            Pp("Priest", b, 0, "pr_mer_1", "Soothing Aura", "HP pulih 0,8% per detik.", "regen:0.008");
+            Pp("Priest", b, 1, "pr_mer_2", "Mana Spring", "Pemulihan mana +25%.", "manaregen:0.25");
+            Pp("Priest", b, 2, "pr_mer_3", "Gentle Hands", "HP maks +6%, mana maks +15.", "hp:0.06;mana:15");
+            Aa("Priest", b, 2, 0, "pr_mer_4", "Heal", 8f, "heal", "holy", 0f, 5f, 0f, "heal:0.3", "Pulihkan 30% HP dirimu dan sekutu di dekatmu.");
+            Aa("Priest", b, 2, 1, "pr_mer_5", "Renewal", 14f, "heal", "holy", 0f, 6f, 0f, "heal:0.07;count:6;tick:1;dur:6", "Pemulihan berkelanjutan 6 detik.");
+            Aa("Priest", b, 3, 0, "pr_mer_6", "Resurrection Light", 100f, "heal", "holy", 0f, 9f, 0f, "heal:1.0;mana:0.5;invuln:2;b_dmgred:0.4;dur:8", "Ultimate: HP penuh, mana pulih, kebal sebentar.");
+            b = PriestBranches[2];
+            Pp("Priest", b, 0, "pr_aeg_1", "Blessed Garb", "Jubah suci: DEF +5, HP maks +5%.", "def:5;hp:0.05");
+            Pp("Priest", b, 1, "pr_aeg_2", "Sanctuary", "Damage masuk -6%.", "dmgred:0.06");
+            Pp("Priest", b, 2, "pr_aeg_3", "Faith", "Mana maks +20, biaya mana -5%.", "mana:20;manacost:0.05");
+            Aa("Priest", b, 2, 0, "pr_aeg_4", "Holy Barrier", 14f, "buff", "holy", 0f, 0f, 0f, "b_dmgred:0.5;dur:6", "Perisai cahaya: damage masuk -50% selama 6 dtk.");
+            Aa("Priest", b, 2, 1, "pr_aeg_5", "Consecration", 13f, "ground", "holy", 1.2f, 6f, 12f, "count:5;tick:1;dur:5;heal:0.03", "Tanah suci melukai musuh dan menyembuhkanmu.");
+            Aa("Priest", b, 3, 0, "pr_aeg_6", "Divine Shield", 90f, "buff", "holy", 0f, 0f, 0f, "invuln:6;b_dmgred:0.8;dur:6;heal:0.2", "Ultimate: kebal selama 6 detik.");
+        }
+
+        static void BuildEvolutions()
+        {
+            string b;
+            curEvo = "Knight"; b = EvoBranch(curEvo);
+            Pp("Swordsman", b, 0, "kn_1", "Plate Mastery", "DEF +8, HP maks +6%.", "def:8;hp:0.06");
+            Pp("Swordsman", b, 1, "kn_2", "Unyielding", "Damage masuk -6%.", "dmgred:0.06");
+            Pp("Swordsman", b, 2, "kn_3", "Bulwark Spirit", "DEF +4, HP pulih 0,5%/dtk.", "def:4;regen:0.005");
+            Aa("Swordsman", b, 2, 0, "kn_4", "Shield Slam", 9f, "cone", "phys", 1.8f, 45f, 4f, "stagger:2;knock:3", "Hantam perisai: menghuyungkan musuh di depan.");
+            Aa("Swordsman", b, 2, 1, "kn_5", "Taunting Roar", 14f, "nova", "phys", 1.0f, 10f, 0f, "stagger:0.8;b_dmgred:0.35;dur:5", "Raungan yang menahan musuh sekitar dan mengurangi damage masuk.");
+            Aa("Swordsman", b, 3, 0, "kn_6", "Fortress", 80f, "buff", "phys", 0f, 0f, 0f, "b_dmgred:0.7;b_dmg:0.2;dur:10;invuln:0.5", "Ultimate: benteng hidup, damage masuk -70% selama 10 dtk.");
+            curEvo = "Berserker"; b = EvoBranch(curEvo);
+            Pp("Swordsman", b, 0, "bz_1", "Bloodlust", "Damage +10%, curi HP 3%.", "dmg:0.10;lifesteal:0.03");
+            Pp("Swordsman", b, 1, "bz_2", "Reckless", "Damage +12%.", "dmg:0.12");
+            Pp("Swordsman", b, 2, "bz_3", "Thick Hide", "HP maks +8%, HP pulih 0,3%/dtk.", "hp:0.08;regen:0.003");
+            Aa("Swordsman", b, 2, 0, "bz_4", "Savage Cleave", 8f, "cone", "phys", 2.2f, 70f, 4.2f, "lifesteal:0.12", "Tebasan buas lebar; sebagian damage menjadi HP.");
+            Aa("Swordsman", b, 2, 1, "bz_5", "Rage Leap", 12f, "dash", "phys", 2.0f, 0f, 8f, "stagger:0.8", "Melompat penuh amarah, menghantam yang dilewati.");
+            Aa("Swordsman", b, 3, 0, "bz_6", "Bloodbath", 70f, "nova", "phys", 0.95f, 7f, 0f, "count:4;tick:0.19;b_lifesteal:0.25;b_dmg:0.3;dur:8", "Ultimate: amukan darah, damage naik 8 detik.");
+            curEvo = "Blademaster"; b = EvoBranch(curEvo);
+            Pp("Swordsman", b, 0, "bm_1", "Swift Blade", "Kecepatan +6%, damage +5%.", "spd:0.06;dmg:0.05");
+            Pp("Swordsman", b, 1, "bm_2", "Keen Eye", "Crit +8%.", "crit:8");
+            Pp("Swordsman", b, 2, "bm_3", "Flow", "Cooldown skill -8%.", "cdr:0.08");
+            Aa("Swordsman", b, 2, 0, "bm_4", "Wind Cutter", 7f, "line", "phys", 1.6f, 1.2f, 12f, "crit:20", "Tebasan jarak menengah yang menembus.");
+            Aa("Swordsman", b, 2, 1, "bm_5", "Flash Step", 9f, "dash", "phys", 1.8f, 0f, 8f, "invuln:0.3", "Meluncur menebas; kebal sesaat.");
+            Aa("Swordsman", b, 3, 0, "bm_6", "Thousand Cuts", 65f, "nova", "phys", 0.55f, 5f, 0f, "count:14;tick:0.12", "Ultimate: rentetan tebasan kilat di sekelilingmu.");
+            curEvo = "Ranger"; b = EvoBranch(curEvo);
+            Pp("Archer", b, 0, "rg_1", "Forager's Instinct", "Kecepatan +4%, HP pulih 0,6%/dtk.", "spd:0.04;regen:0.006");
+            Pp("Archer", b, 1, "rg_2", "Nature's Aim", "Damage +8%.", "dmg:0.08");
+            Pp("Archer", b, 2, "rg_3", "Trap Craft", "Cooldown skill -10%.", "cdr:0.10");
+            Aa("Archer", b, 2, 0, "rg_4", "Bear Trap", 10f, "trap", "arrow", 2.2f, 3f, 14f, "stagger:3;dur:15", "Pasang perangkap; menjepit monster yang menginjaknya.");
+            Aa("Archer", b, 2, 1, "rg_5", "Poison Arrow", 9f, "bolt", "arrow", 1.5f, 2f, 40f, "dot:0.25:6;slow:0.7:4", "Panah beracun: damage berkelanjutan dan memperlambat.");
+            Aa("Archer", b, 3, 0, "rg_6", "Wild Hunt", 75f, "summon", "arrow", 1.4f, 12f, 0f, "dur:15;pet:wolf", "Ultimate: serigala roh berburu bersamamu.");
+            curEvo = "Multishot"; b = EvoBranch(curEvo);
+            Pp("Archer", b, 0, "ms_1", "Quick Fingers", "Damage +8%, cooldown -5%.", "dmg:0.08;cdr:0.05");
+            Pp("Archer", b, 1, "ms_2", "Steady Volley", "Crit +5%.", "crit:5");
+            Pp("Archer", b, 2, "ms_3", "Wide Quiver", "Cooldown -8%, damage +4%.", "cdr:0.08;dmg:0.04");
+            Aa("Archer", b, 2, 0, "ms_4", "Triple Shot", 6f, "multi", "arrow", 1.2f, 0f, 40f, "count:3;spread:16", "Tiga panah sekaligus.");
+            Aa("Archer", b, 2, 1, "ms_5", "Arrow Rain", 12f, "ground", "arrow", 0.7f, 6f, 40f, "count:10;tick:0.15;dur:1.5", "Hujan panah di area bidikan.");
+            Aa("Archer", b, 3, 0, "ms_6", "Storm of Arrows", 70f, "multi", "arrow", 0.9f, 0f, 40f, "count:24;spread:70", "Ultimate: badai 24 panah.");
+            curEvo = "ShadowHunter"; b = EvoBranch(curEvo);
+            Pp("Archer", b, 0, "sh_1", "Light Step", "Kecepatan +8%, damage masuk -3%.", "spd:0.08;dmgred:0.03");
+            Pp("Archer", b, 1, "sh_2", "Ambush", "Crit +10%, damage +5%.", "crit:10;dmg:0.05");
+            Pp("Archer", b, 2, "sh_3", "Shadow Cloak", "Damage masuk -6%, cooldown -5%.", "dmgred:0.06;cdr:0.05");
+            Aa("Archer", b, 2, 0, "sh_4", "Smoke Bomb", 12f, "nova", "arrow", 0.8f, 6f, 0f, "slow:0.4:4;stagger:1;b_dmgred:0.5;dur:3", "Bom asap: musuh terhuyung, kamu sulit disentuh.");
+            Aa("Archer", b, 2, 1, "sh_5", "Backstab Shot", 8f, "bolt", "arrow", 2.6f, 0f, 40f, "crit:50", "Tembakan mematikan dengan peluang crit sangat tinggi.");
+            Aa("Archer", b, 3, 0, "sh_6", "Nightfall", 75f, "buff", "arrow", 0f, 0f, 0f, "invuln:2;b_dmg:0.5;b_spd:0.3;b_crit:30;dur:10", "Ultimate: menyatu dengan bayangan, damage dan crit melonjak.");
+            curEvo = "Pyromancer"; b = EvoBranch(curEvo);
+            Pp("FireMage", b, 0, "py_1", "Fire Mastery", "Damage +12%.", "dmg:0.12");
+            Pp("FireMage", b, 1, "py_2", "Searing Mind", "Mana maks +25.", "mana:25");
+            Pp("FireMage", b, 2, "py_3", "Blast Radius", "Crit +5%, damage +4%.", "crit:5;dmg:0.04");
+            Aa("FireMage", b, 2, 0, "py_4", "Blast Wave", 10f, "nova", "fire", 2.2f, 8f, 0f, "knock:4;burn:0.2:4", "Ledakan api membakar dan melempar musuh.");
+            Aa("FireMage", b, 2, 1, "py_5", "Fire Storm", 14f, "ground", "fire", 1.0f, 7f, 28f, "count:8;tick:0.4;dur:3.5;burn:0.15:3", "Badai api di area bidikan.");
+            Aa("FireMage", b, 3, 0, "py_6", "Armageddon", 85f, "ground", "fire", 1.6f, 12f, 34f, "count:10;tick:0.5;dur:5;burn:0.2:4", "Ultimate: hujan meteor tak berkesudahan.");
+            curEvo = "PhoenixMage"; b = EvoBranch(curEvo);
+            Pp("FireMage", b, 0, "ph_1", "Warm Embers", "HP pulih 0,7%/dtk.", "regen:0.007");
+            Pp("FireMage", b, 1, "ph_2", "Phoenix Feather", "HP maks +10%, mana pulih +10%.", "hp:0.10;manaregen:0.10");
+            Pp("FireMage", b, 2, "ph_3", "Rebirth Flame", "Damage masuk -5%.", "dmgred:0.05");
+            Aa("FireMage", b, 2, 0, "ph_4", "Healing Flame", 10f, "heal", "fire", 0f, 6f, 0f, "heal:0.25", "Api hangat memulihkan 25% HP.");
+            Aa("FireMage", b, 2, 1, "ph_5", "Fire Wings", 13f, "buff", "fire", 0f, 0f, 0f, "b_spd:0.25;b_dmgred:0.35;dur:6", "Sayap api: lebih cepat dan lebih kebal.");
+            Aa("FireMage", b, 3, 0, "ph_6", "Phoenix Ascension", 100f, "nova", "fire", 3.0f, 10f, 0f, "heal:0.6;mana:0.5;invuln:2", "Ultimate: bangkit dalam kobaran api, memulihkan HP dan mana.");
+            curEvo = "InfernoKnight"; b = EvoBranch(curEvo);
+            Pp("FireMage", b, 0, "ik_1", "Flame Armor", "DEF +8, HP maks +6%.", "def:8;hp:0.06");
+            Pp("FireMage", b, 1, "ik_2", "Burning Aura", "Damage +8%, damage masuk -3%.", "dmg:0.08;dmgred:0.03");
+            Pp("FireMage", b, 2, "ik_3", "Searing Stride", "Kecepatan +5%, curi HP 2%.", "spd:0.05;lifesteal:0.02");
+            Aa("FireMage", b, 2, 0, "ik_4", "Flaming Strike", 7f, "cone", "fire", 2.1f, 60f, 4.5f, "burn:0.2:4", "Tebasan tongkat berapi jarak dekat.");
+            Aa("FireMage", b, 2, 1, "ik_5", "Blazing Charge", 10f, "dash", "fire", 2.0f, 0f, 9f, "burn:0.2:3", "Menerjang dalam api, membakar yang dilewati.");
+            Aa("FireMage", b, 3, 0, "ik_6", "Inferno Blade", 70f, "nova", "fire", 3.2f, 7f, 0f, "burn:0.25:5;b_dmg:0.25;dur:8", "Ultimate: bilah inferno meledak di sekelilingmu.");
+            curEvo = "Geomancer"; b = EvoBranch(curEvo);
+            Pp("EarthMage", b, 0, "ge_1", "Terrain Sense", "Kecepatan +5%, damage +5%.", "spd:0.05;dmg:0.05");
+            Pp("EarthMage", b, 1, "ge_2", "Fault Line", "Damage +10%.", "dmg:0.10");
+            Pp("EarthMage", b, 2, "ge_3", "Earth Pulse", "Mana pulih +15%, cooldown -6%.", "manaregen:0.15;cdr:0.06");
+            Aa("EarthMage", b, 2, 0, "ge_4", "Fissure", 9f, "line", "earth", 2.0f, 2f, 20f, "stagger:1;slow:0.5:3", "Retakan tanah memanjang menghuyungkan musuh.");
+            Aa("EarthMage", b, 2, 1, "ge_5", "Sinking Ground", 13f, "ground", "earth", 1.0f, 6f, 24f, "slow:0.2:4;count:5;tick:0.6;dur:3", "Tanah melunak menjerat dan melukai.");
+            Aa("EarthMage", b, 3, 0, "ge_6", "Continental Quake", 80f, "nova", "earth", 3.2f, 14f, 0f, "stagger:2;knock:5", "Ultimate: gempa benua mengguncang area sangat luas.");
+            curEvo = "GolemMaster"; b = EvoBranch(curEvo);
+            Pp("EarthMage", b, 0, "gm_1", "Stone Bond", "HP maks +8%, DEF +5.", "hp:0.08;def:5");
+            Pp("EarthMage", b, 1, "gm_2", "Command Voice", "Damage +8%.", "dmg:0.08");
+            Pp("EarthMage", b, 2, "gm_3", "Core Link", "Mana pulih +20%, mana maks +15.", "manaregen:0.20;mana:15");
+            Aa("EarthMage", b, 2, 0, "gm_4", "Summon Golem", 16f, "summon", "earth", 1.5f, 12f, 0f, "dur:22;pet:golem", "Panggil golem batu yang menyerang musuh terdekat.");
+            Aa("EarthMage", b, 2, 1, "gm_5", "Golem Smash", 10f, "ground", "earth", 2.4f, 4f, 18f, "stagger:1.2;knock:3", "Golem tak terlihat menghantam titik bidikan.");
+            Aa("EarthMage", b, 3, 0, "gm_6", "Colossus", 90f, "summon", "earth", 2.6f, 16f, 0f, "dur:30;pet:colossus", "Ultimate: kolosus batu raksasa bertarung 30 detik.");
+            curEvo = "TitanGuardian"; b = EvoBranch(curEvo);
+            Pp("EarthMage", b, 0, "tg_1", "Mountain Body", "HP maks +12%, DEF +6.", "hp:0.12;def:6");
+            Pp("EarthMage", b, 1, "tg_2", "Stone Will", "Damage masuk -8%.", "dmgred:0.08");
+            Pp("EarthMage", b, 2, "tg_3", "Rooted Titan", "HP pulih 0,7%/dtk, damage +4%.", "regen:0.007;dmg:0.04");
+            Aa("EarthMage", b, 2, 0, "tg_4", "Titan Fist", 9f, "cone", "earth", 2.2f, 55f, 4.5f, "stagger:1.5;knock:3", "Tinju batu menghantam musuh di depan.");
+            Aa("EarthMage", b, 2, 1, "tg_5", "Stone Provoke", 14f, "nova", "earth", 1.2f, 9f, 0f, "stagger:1;b_dmgred:0.4;dur:6", "Memancing musuh sambil mengeras.");
+            Aa("EarthMage", b, 3, 0, "tg_6", "Mountain's Wrath", 85f, "nova", "earth", 3.8f, 9f, 0f, "b_dmgred:0.6;dur:8;stagger:1.5", "Ultimate: amarah gunung, kebal dan menghantam sekitar.");
+            curEvo = "Cryomancer"; b = EvoBranch(curEvo);
+            Pp("WaterMage", b, 0, "cr_1", "Permafrost", "Damage +10%.", "dmg:0.10");
+            Pp("WaterMage", b, 1, "cr_2", "Cold Heart", "Crit +6%, mana maks +15.", "crit:6;mana:15");
+            Pp("WaterMage", b, 2, "cr_3", "Shatter", "Damage +6%, crit +4%.", "dmg:0.06;crit:4");
+            Aa("WaterMage", b, 2, 0, "cr_4", "Ice Lance", 7f, "bolt", "water", 2.2f, 1.5f, 40f, "slow:0.3:4;stagger:0.5", "Tombak es melesat dan memperlambat.");
+            Aa("WaterMage", b, 2, 1, "cr_5", "Glacial Prison", 13f, "ground", "water", 1.2f, 5f, 24f, "stagger:3.5", "Penjara es membekukan musuh di area.");
+            Aa("WaterMage", b, 3, 0, "cr_6", "Absolute Zero", 85f, "nova", "water", 3.4f, 12f, 0f, "stagger:4;slow:0.2:5", "Ultimate: nol mutlak membekukan semuanya.");
+            curEvo = "Tidecaller"; b = EvoBranch(curEvo);
+            Pp("WaterMage", b, 0, "td_1", "Tidal Force", "Damage +10%.", "dmg:0.10");
+            Pp("WaterMage", b, 1, "td_2", "Undertow", "Mana pulih +20%, kecepatan +3%.", "manaregen:0.20;spd:0.03");
+            Pp("WaterMage", b, 2, "td_3", "Sea Legs", "HP maks +6%, damage masuk -3%.", "hp:0.06;dmgred:0.03");
+            Aa("WaterMage", b, 2, 0, "td_4", "Crashing Wave", 9f, "cone", "water", 2.0f, 70f, 12f, "knock:6", "Ombak menghantam dan mendorong jauh.");
+            Aa("WaterMage", b, 2, 1, "td_5", "Whirlpool", 13f, "ground", "water", 1.1f, 6f, 24f, "pull:7;count:5;tick:0.6;dur:3;slow:0.5:3", "Pusaran air menarik musuh ke tengah.");
+            Aa("WaterMage", b, 3, 0, "td_6", "Leviathan's Wrath", 85f, "line", "water", 4.0f, 6f, 34f, "knock:10;stagger:1.5", "Ultimate: ombak leviathan menyapu lurus ke depan.");
+            curEvo = "StormMage"; b = EvoBranch(curEvo);
+            Pp("WaterMage", b, 0, "sm_1", "Static Charge", "Damage +9%, crit +4%.", "dmg:0.09;crit:4");
+            Pp("WaterMage", b, 1, "sm_2", "Conductive", "Cooldown skill -10%.", "cdr:0.10");
+            Pp("WaterMage", b, 2, "sm_3", "Storm Focus", "Mana maks +20, mana pulih +15%.", "mana:20;manaregen:0.15");
+            Aa("WaterMage", b, 2, 0, "sm_4", "Chain Lightning", 8f, "bolt", "storm", 1.8f, 4f, 36f, "chain:4;stagger:0.4", "Petir melompat ke 4 musuh terdekat.");
+            Aa("WaterMage", b, 2, 1, "sm_5", "Thunderclap", 12f, "nova", "storm", 2.0f, 8f, 0f, "stagger:1.5", "Gelegar petir menghuyungkan musuh sekitar.");
+            Aa("WaterMage", b, 3, 0, "sm_6", "Tempest Rain", 80f, "ground", "storm", 1.1f, 11f, 30f, "count:12;tick:0.45;dur:6;stagger:0.4", "Ultimate: hujan badai petir di area luas.");
+            curEvo = "TempestLord"; b = EvoBranch(curEvo);
+            Pp("WindMage", b, 0, "tl_1", "Storm's Might", "Damage +10%.", "dmg:0.10");
+            Pp("WindMage", b, 1, "tl_2", "Eye of the Storm", "Damage masuk -5%, mana pulih +15%.", "dmgred:0.05;manaregen:0.15");
+            Pp("WindMage", b, 2, "tl_3", "Gale Force", "Cooldown -8%, damage +4%.", "cdr:0.08;dmg:0.04");
+            Aa("WindMage", b, 2, 0, "tl_4", "Whirlwind", 9f, "nova", "wind", 1.9f, 6f, 0f, "pull:3;count:4;tick:0.3", "Pusaran di sekelilingmu menyedot dan melukai.");
+            Aa("WindMage", b, 2, 1, "tl_5", "Twister", 13f, "ground", "wind", 1.2f, 5f, 26f, "pull:6;count:7;tick:0.5;dur:3.5", "Tornado kecil di titik bidikan.");
+            Aa("WindMage", b, 3, 0, "tl_6", "Maelstrom", 85f, "ground", "wind", 1.1f, 10f, 28f, "pull:10;count:14;tick:0.5;dur:7;stagger:0.4", "Ultimate: pusaran badai dahsyat.");
+            curEvo = "BladeWind"; b = EvoBranch(curEvo);
+            Pp("WindMage", b, 0, "bw_1", "Edge of Gale", "Crit +8%.", "crit:8");
+            Pp("WindMage", b, 1, "bw_2", "Wind Razor", "Damage +10%.", "dmg:0.10");
+            Pp("WindMage", b, 2, "bw_3", "Dance of Blades", "Cooldown -8%, crit +3%.", "cdr:0.08;crit:3");
+            Aa("WindMage", b, 2, 0, "bw_4", "Crescent Slash", 7f, "line", "wind", 2.0f, 2.2f, 22f, "crit:25", "Sabit angin lebar menembus musuh.");
+            Aa("WindMage", b, 2, 1, "bw_5", "Blade Storm", 12f, "bolt", "wind", 0.9f, 0f, 24f, "count:9;spread:90", "Sembilan bilah angin ke segala arah depan.");
+            Aa("WindMage", b, 3, 0, "bw_6", "Heaven's Edge", 80f, "line", "wind", 4.5f, 4f, 34f, "crit:60;stagger:1", "Ultimate: sayatan surgawi, crit sangat tinggi.");
+            curEvo = "SkyDancer"; b = EvoBranch(curEvo);
+            Pp("WindMage", b, 0, "sd_1", "Sky Step", "Kecepatan +10%.", "spd:0.10");
+            Pp("WindMage", b, 1, "sd_2", "Evasion", "Damage masuk -7%, kecepatan +3%.", "dmgred:0.07;spd:0.03");
+            Pp("WindMage", b, 2, "sd_3", "Zephyr Reflex", "Cooldown -10%, HP pulih 0,4%/dtk.", "cdr:0.10;regen:0.004");
+            Aa("WindMage", b, 2, 0, "sd_4", "Air Dash", 6f, "dash", "wind", 1.4f, 0f, 10f, "invuln:0.4", "Dash udara jauh; kebal sesaat.");
+            Aa("WindMage", b, 2, 1, "sd_5", "Skyfall Strike", 11f, "dash", "wind", 2.6f, 0f, 8f, "stagger:1;knock:2", "Menukik menghantam yang dilewati.");
+            Aa("WindMage", b, 3, 0, "sd_6", "Heavenly Waltz", 70f, "buff", "wind", 0f, 0f, 0f, "b_spd:0.4;b_dmg:0.3;b_dmgred:0.3;b_cdr:0.4;dur:10", "Ultimate: tarian langit, semua statistik melonjak.");
+            curEvo = "Paladin"; b = EvoBranch(curEvo);
+            Pp("Priest", b, 0, "pl_1", "Holy Plate", "DEF +8, HP maks +6%.", "def:8;hp:0.06");
+            Pp("Priest", b, 1, "pl_2", "Sacred Vow", "Damage masuk -6%, damage +4%.", "dmgred:0.06;dmg:0.04");
+            Pp("Priest", b, 2, "pl_3", "Light's Grace", "HP pulih 0,6%/dtk, curi HP 2%.", "regen:0.006;lifesteal:0.02");
+            Aa("Priest", b, 2, 0, "pl_4", "Hammer of Light", 8f, "cone", "holy", 2.2f, 55f, 4.5f, "stagger:1;heal:0.05", "Palu suci menghantam; sebagian HP pulih.");
+            Aa("Priest", b, 2, 1, "pl_5", "Shield of Faith", 13f, "buff", "holy", 0f, 0f, 0f, "b_dmgred:0.5;heal:0.15;dur:6", "Tameng iman: kebal sebagian dan memulihkan HP.");
+            Aa("Priest", b, 3, 0, "pl_6", "Avenging Wrath", 80f, "nova", "holy", 3.6f, 8f, 0f, "b_dmg:0.3;heal:0.3;dur:8;stagger:1", "Ultimate: murka suci, damage naik dan HP pulih.");
+            curEvo = "Saint"; b = EvoBranch(curEvo);
+            Pp("Priest", b, 0, "sa_1", "Blessed Soul", "Mana maks +30, mana pulih +20%.", "mana:30;manaregen:0.20");
+            Pp("Priest", b, 1, "sa_2", "Halo", "Damage +10%.", "dmg:0.10");
+            Pp("Priest", b, 2, "sa_3", "Divine Favor", "Cooldown -10%, biaya mana -8%.", "cdr:0.10;manacost:0.08");
+            Aa("Priest", b, 2, 0, "sa_4", "Holy Nova", 9f, "nova", "holy", 2.0f, 8f, 0f, "heal:0.12;mana:0.1", "Ledakan cahaya: melukai musuh, memulihkan HP dan mana.");
+            Aa("Priest", b, 2, 1, "sa_5", "Blessing", 15f, "buff", "holy", 0f, 0f, 0f, "b_dmg:0.25;b_spd:0.15;b_dmgred:0.2;dur:10;mana:0.3", "Berkat: damage, kecepatan, ketahanan naik 10 dtk.");
+            Aa("Priest", b, 3, 0, "sa_6", "Heaven's Gate", 95f, "ground", "holy", 1.5f, 11f, 26f, "count:10;tick:0.6;dur:6;heal:0.05;mana:0.04", "Ultimate: gerbang surga menghujani cahaya.");
+            curEvo = "Cleric"; b = EvoBranch(curEvo);
+            Pp("Priest", b, 0, "cl_1", "Compassion", "HP maks +6%, HP pulih 0,8%/dtk.", "hp:0.06;regen:0.008");
+            Pp("Priest", b, 1, "cl_2", "Pure Heart", "Mana pulih +25%.", "manaregen:0.25");
+            Pp("Priest", b, 2, "cl_3", "Mending Touch", "Mana maks +20, biaya mana -10%.", "mana:20;manacost:0.10");
+            Aa("Priest", b, 2, 0, "cl_4", "Greater Heal", 8f, "heal", "holy", 0f, 6f, 0f, "heal:0.5", "Penyembuhan besar 50% HP.");
+            Aa("Priest", b, 2, 1, "cl_5", "Cleansing Light", 14f, "heal", "holy", 0f, 7f, 0f, "heal:0.1;count:5;tick:1;dur:5;b_dmgred:0.25", "Cahaya pembersih: pulih berkelanjutan dan perlindungan.");
+            Aa("Priest", b, 3, 0, "cl_6", "Miracle", 100f, "heal", "holy", 0f, 10f, 0f, "heal:1.0;mana:1.0;invuln:3", "Ultimate: keajaiban, HP dan mana penuh.");
+            curEvo = "";
+        }
+    }
+}
